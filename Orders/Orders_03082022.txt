@@ -1,0 +1,3 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+2,jasmeen kaur,BC,4.45,Carpet,450.00,2.25,2.10,1012.5000,945.0000,8710.875000,10668.375000
+3,Jasmine kaur,BC,4.45,Carpet,600.00,2.25,2.10,1350.0000,1260.0000,11614.500000,14224.500000
