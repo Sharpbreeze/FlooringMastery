@@ -6,6 +6,7 @@
 package com.sgjk.flooringmastery.inventory.dao;
 
 import com.sgjk.flooringmastery.dto.Inventory;
+import com.sgjk.flooringmastery.dto.Tax;
 import com.sgjk.flooringmastery.order.dao.FlooringMasteryPersistenceException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,7 +15,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -29,10 +32,13 @@ public class FlooringMasteryInventoryDaoImpl implements FlooringMasteryInventory
     private Map<String, Inventory> inventoryMap = new HashMap<>();
     private String COMMA = ",";
     private String INVENTORY_FILE_PATH;
-    private Inventory inventory;
     
     public FlooringMasteryInventoryDaoImpl() {
         this.INVENTORY_FILE_PATH = "Inventory.txt";
+    }
+    
+    public FlooringMasteryInventoryDaoImpl(String filePath){
+        this.INVENTORY_FILE_PATH = filePath;
     }
 
     
@@ -44,31 +50,12 @@ public class FlooringMasteryInventoryDaoImpl implements FlooringMasteryInventory
         return inventoryMap.get(productType);
     }
     
-    // if (inventory.getProductType().equalsIgnoreCase(INVENTORY_FILE_PATH))  {
-//        return inventoryMap.values().stream().map(item -> marshallInventory(item)) + "";
-//    }  else {
-//        System.out.println("No Match Found, Please try again!");
-//    } 
-//    return Product;
-//
-//    @Override
-//    public BigDecimal getCostPerSqFt(BigDecimal CostPerSqFt) throws FlooringMasteryPersistenceException {//check out all these methods
-//        if (inventory.getCostPerSqFt().equals(INVENTORY_FILE_PATH)) {
-//        return (BigDecimal) inventoryMap.values().stream().map(item -> marshallInventory(item));
-//    }   else {
-//        System.out.println("No Match Found, Please try again!");
-//    } 
-//    return CostPerSqFt;}
-//
-//    @Override
-//    public BigDecimal getLabourCostPerSqFt(BigDecimal LabourCostPerSqFt) throws FlooringMasteryPersistenceException {//check out all these methods
-//        if (inventory.getLabourCostPerSqFt().equals(INVENTORY_FILE_PATH)) {
-//        return (BigDecimal) inventoryMap.values().stream().map(item -> marshallInventory(item));
-//    }   else {
-//        System.out.println("No Match Found, Please try again!");
-//    } 
-//        return LabourCostPerSqFt;
-//    }
+    @Override
+    public List<Inventory> getAllInventory() throws FlooringMasteryPersistenceException{
+        loadInventory();
+        return new ArrayList<>(inventoryMap.values());
+    }
+    
     
     private Inventory unmarshallInventory(String inventoryItem) {
         String[] token = inventoryItem.split(COMMA);
@@ -101,32 +88,5 @@ public class FlooringMasteryInventoryDaoImpl implements FlooringMasteryInventory
         
         reader.close();
     }
-    
-//    private String marshallInventory(Inventory anItem) {// i do not need this method for this app?
-//        String itemAsText = anItem.getProductType()+ COMMA;
-//        itemAsText += anItem.getCostPerSqFt() + COMMA;
-//        itemAsText += anItem.getLabourCostPerSqFt() + COMMA;
-//
-//        return itemAsText;
-//    }
-//
-//    private void writeInventory() throws FlooringMasteryPersistenceException {// i do not need this method for this app?
-//        PrintWriter out;
-//
-//        try {
-//            out = new PrintWriter(new FileWriter(INVENTORY_FILE_PATH));
-//        } catch (IOException e) {
-//            throw new FlooringMasteryPersistenceException(
-//                    "Could not save data ", e);
-//        }
-//
-//        inventoryMap.values().stream()
-//                .map(item -> marshallInventory(item))
-//                .forEachOrdered((lineItem) -> {
-//                    out.println(lineItem);
-//                    out.flush();
-//                });
-//        out.close();
-//    }
     
 }

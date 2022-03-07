@@ -25,8 +25,6 @@ public interface FlooringMasteryOrderDao {
             throws FlooringMasteryPersistenceException;
     List<Order> getAllOrders (LocalDate date) 
             throws FlooringMasteryPersistenceException;
-//    List<Order> getOrdersByDate(LocalDate Date) 
-//            throws FlooringMasteryPersistenceException;
     public void exportAllData () 
             throws FlooringMasteryPersistenceException;
 }

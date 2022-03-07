@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.sgjk.flooringmastery.inventory.dao.FlooringMasteryInventoryDaoImplTest" time="0.001" errors="0" skipped="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.sgjk.flooringmastery.inventory.dao.FlooringMasteryInventoryDaoImplTest" time="0.018" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.12+7"/>
@@ -21,8 +21,7 @@
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.io.tmpdir" value="C:\Users\kaurj\AppData\Local\Temp\"/>
-    <property name="line.separator" value="
-"/>
+    <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
@@ -64,5 +63,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.sgjk.flooringmastery.inventory.dao.FlooringMasteryInventoryDaoImplTest" name="com.sgjk.flooringmastery.inventory.dao.FlooringMasteryInventoryDaoImplTest.testSomeMethod" time="0.001"/>
+  <testcase name="testSomeMethod" classname="com.sgjk.flooringmastery.inventory.dao.FlooringMasteryInventoryDaoImplTest" time="0.014"/>
 </testsuite>

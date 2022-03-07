@@ -33,12 +33,16 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
     private Map<Integer, Order> orderMap = new HashMap<>();
     private String COMMA = ",";
     private String ORDER_FILE_PATH;
-    private String EXPORT_DATA_FILE_PATH;
+    private String EXPORT_DATA_FILE_PATH = "ExportAllData.txt";
+    
 
     public FlooringMasteryOrderDaoImpl() {
-        //this.COMMA = COMMA;
         this.ORDER_FILE_PATH = "Orders/";// do I label all the order files seperately or build a code line that can sort it out
-        this.EXPORT_DATA_FILE_PATH = "ExportAllData.txt";
+    }
+
+    public FlooringMasteryOrderDaoImpl(String filePath) {
+        this.ORDER_FILE_PATH = filePath;
+
     }
 
     @Override
@@ -93,11 +97,6 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
 
     }
 
-//    @Override
-//    public List<Order> getOrdersByDate(LocalDate Date) throws FlooringMasteryPersistenceException {// check out this method: seems like have some issues
-//        List<Order> orders = getAllOrders().stream().collect(Collectors.toList());
-//        return orders;
-//    }
     @Override
     public void exportAllData() throws FlooringMasteryPersistenceException {
 
@@ -126,10 +125,10 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
             String currentLine;
             reader.nextLine();
             while (reader.hasNextLine()) {
-                    currentLine = reader.nextLine();
-                    currentLine = dateString + COMMA + currentLine;
-                    writer.println(currentLine);
-                    writer.flush();
+                currentLine = reader.nextLine();
+                currentLine = dateString + COMMA + currentLine;
+                writer.println(currentLine);
+                writer.flush();
             }
         }
 
@@ -137,25 +136,32 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
     }
 
     private Order unmarshallOrder(String orderItem) {
+        int normalCommaCount = 11;
         String[] token = orderItem.split(COMMA);
-        //int orderID = Integer.parseInt(token[0]);
+        int actualCommaCount = token.length - 1;
+        int index = 0;
         Order OrderFromFile = new Order();
-        OrderFromFile.setOrderID(Integer.parseInt(token[0]));
-        OrderFromFile.setCustomerName(token[1]);
-        OrderFromFile.setStateCode(token[2]);
-        OrderFromFile.setTaxRate(new BigDecimal(token[3]));
-        OrderFromFile.setProductType(token[4]);
-        OrderFromFile.setArea(new BigDecimal(token[5]));
-        OrderFromFile.setCostPerSqFt(new BigDecimal(token[6]));
-        OrderFromFile.setLabourCostPerSqFt(new BigDecimal(token[7]));
-        OrderFromFile.setMaterialCost(new BigDecimal(token[8]));
-        OrderFromFile.setLabourCost(new BigDecimal(token[9]));
-        OrderFromFile.setTaxAmount(new BigDecimal(token[10]));
-        OrderFromFile.setGrandTotal(new BigDecimal(token[11]));
-//        OrderFromFile.setDueDate(LocalDate.parse(token[12],
-//                DateTimeFormatter.ofPattern("MM/dd/yyyy")));;
-//        OrderFromFile.setLocalDate(LocalDate.parse(token[13],
-//                DateTimeFormatter.ofPattern("MM/dd/yyyy")));;
+        OrderFromFile.setOrderID(Integer.parseInt(token[index++]));
+        String customerName = "";
+        for (int i = 0; i <= actualCommaCount - normalCommaCount; i++) {
+            if (i != actualCommaCount - normalCommaCount) {
+                customerName += token[index++] + COMMA;
+            } else {
+                customerName += token[index++];
+            }
+
+        }
+        OrderFromFile.setCustomerName(customerName);
+        OrderFromFile.setStateCode(token[index++]);
+        OrderFromFile.setTaxRate(new BigDecimal(token[index++]));
+        OrderFromFile.setProductType(token[index++]);
+        OrderFromFile.setArea(new BigDecimal(token[index++]));
+        OrderFromFile.setCostPerSqFt(new BigDecimal(token[index++]));
+        OrderFromFile.setLabourCostPerSqFt(new BigDecimal(token[index++]));
+        OrderFromFile.setMaterialCost(new BigDecimal(token[index++]));
+        OrderFromFile.setLabourCost(new BigDecimal(token[index++]));
+        OrderFromFile.setTaxAmount(new BigDecimal(token[index++]));
+        OrderFromFile.setGrandTotal(new BigDecimal(token[index++]));
 
         return OrderFromFile;
     }

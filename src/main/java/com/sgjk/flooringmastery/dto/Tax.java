@@ -54,4 +54,3 @@ public class Tax {
     
     
 }
-//State,StateName,TaxRate

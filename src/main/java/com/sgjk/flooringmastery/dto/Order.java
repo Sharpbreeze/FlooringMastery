@@ -6,6 +6,7 @@
 package com.sgjk.flooringmastery.dto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ import java.util.Objects;
  * @author kaurj
  */
 public class Order {
+
     int orderID;
     String customerName;
     String stateCode;
@@ -27,30 +29,29 @@ public class Order {
     BigDecimal taxAmount;
     BigDecimal grandTotal;
     LocalDate dueDate;
-    LocalDate localDate;
-    
-    public Order(int orderID, String customerName, String stateCode, BigDecimal taxRate, String productType, BigDecimal area, BigDecimal costPerSqFt, BigDecimal labourCostPerSqFt, BigDecimal materialCost, BigDecimal labourCost, BigDecimal taxAmount, BigDecimal grandTotal, LocalDate dueDtae, LocalDate localDate) {
-       this.orderID = orderID;
+
+    public Order(int orderID, String customerName, String stateCode, BigDecimal taxRate, String productType,
+            BigDecimal area, BigDecimal costPerSqFt, BigDecimal labourCostPerSqFt,
+            BigDecimal materialCost, BigDecimal labourCost, BigDecimal taxAmount, BigDecimal grandTotal, LocalDate dueDate) {
+        this.orderID = orderID;
         this.customerName = customerName;
         this.stateCode = stateCode;
-        this.taxRate = taxRate;
+        this.taxRate = taxRate.setScale(2, RoundingMode.HALF_UP);
         this.productType = productType;
-        this.area = area;
-        this.costPerSqFt = costPerSqFt;
-        this.labourCostPerSqFt = labourCostPerSqFt;
-        this.materialCost = materialCost;
-        this.labourCost = labourCost;
-        this.taxAmount = taxAmount;
-        this.grandTotal = grandTotal;
+        this.area = area.setScale(2, RoundingMode.HALF_UP);
+        this.costPerSqFt = costPerSqFt.setScale(2, RoundingMode.HALF_UP);
+        this.labourCostPerSqFt = labourCostPerSqFt.setScale(2, RoundingMode.HALF_UP);
+        this.materialCost = materialCost.setScale(2, RoundingMode.HALF_UP);
+        this.labourCost = labourCost.setScale(2, RoundingMode.HALF_UP);
+        this.taxAmount = taxAmount.setScale(2, RoundingMode.HALF_UP);
+        this.grandTotal = grandTotal.setScale(2, RoundingMode.HALF_UP);
         this.dueDate = dueDate;
-        this.localDate = localDate;
-    }
-    
-    public Order (){
-        
+
     }
 
-    
+    public Order() {
+
+    }
 
     public int getOrderID() {
         return orderID;
@@ -81,7 +82,7 @@ public class Order {
     }
 
     public void setTaxRate(BigDecimal taxRate) {
-        this.taxRate = taxRate;
+        this.taxRate = taxRate.setScale(2, RoundingMode.HALF_UP);
     }
 
     public String getProductType() {
@@ -97,7 +98,7 @@ public class Order {
     }
 
     public void setArea(BigDecimal area) {
-        this.area = area;
+        this.area = area.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getCostPerSqFt() {
@@ -105,7 +106,7 @@ public class Order {
     }
 
     public void setCostPerSqFt(BigDecimal costPerSqFt) {
-        this.costPerSqFt = costPerSqFt;
+        this.costPerSqFt = costPerSqFt.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getLabourCostPerSqFt() {
@@ -113,7 +114,7 @@ public class Order {
     }
 
     public void setLabourCostPerSqFt(BigDecimal labourCostPerSqFt) {
-        this.labourCostPerSqFt = labourCostPerSqFt;
+        this.labourCostPerSqFt = labourCostPerSqFt.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getMaterialCost() {
@@ -121,7 +122,7 @@ public class Order {
     }
 
     public void setMaterialCost(BigDecimal materialCost) {
-        this.materialCost = materialCost;
+        this.materialCost = materialCost.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getLabourCost() {
@@ -129,7 +130,7 @@ public class Order {
     }
 
     public void setLabourCost(BigDecimal labourCost) {
-        this.labourCost = labourCost;
+        this.labourCost = labourCost.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getTaxAmount() {
@@ -137,7 +138,7 @@ public class Order {
     }
 
     public void setTaxAmount(BigDecimal taxAmount) {
-        this.taxAmount = taxAmount;
+        this.taxAmount = taxAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getGrandTotal() {
@@ -145,7 +146,7 @@ public class Order {
     }
 
     public void setGrandTotal(BigDecimal grandTotal) {
-        this.grandTotal = grandTotal;
+        this.grandTotal = grandTotal.setScale(2, RoundingMode.HALF_UP);
     }
 
     public LocalDate getDueDate() {
@@ -156,31 +157,22 @@ public class Order {
         this.dueDate = dueDate;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
-    }
-
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + this.orderID;
-        hash = 83 * hash + Objects.hashCode(this.customerName);
-        hash = 83 * hash + Objects.hashCode(this.stateCode);
-        hash = 83 * hash + Objects.hashCode(this.taxRate);
-        hash = 83 * hash + Objects.hashCode(this.productType);
-        hash = 83 * hash + Objects.hashCode(this.area);
-        hash = 83 * hash + Objects.hashCode(this.costPerSqFt);
-        hash = 83 * hash + Objects.hashCode(this.labourCostPerSqFt);
-        hash = 83 * hash + Objects.hashCode(this.materialCost);
-        hash = 83 * hash + Objects.hashCode(this.labourCost);
-        hash = 83 * hash + Objects.hashCode(this.taxAmount);
-        hash = 83 * hash + Objects.hashCode(this.grandTotal);
-        hash = 83 * hash + Objects.hashCode(this.dueDate);
-        hash = 83 * hash + Objects.hashCode(this.localDate);
+        hash = 37 * hash + this.orderID;
+        hash = 37 * hash + Objects.hashCode(this.customerName);
+        hash = 37 * hash + Objects.hashCode(this.stateCode);
+        hash = 37 * hash + Objects.hashCode(this.taxRate);
+        hash = 37 * hash + Objects.hashCode(this.productType);
+        hash = 37 * hash + Objects.hashCode(this.area);
+        hash = 37 * hash + Objects.hashCode(this.costPerSqFt);
+        hash = 37 * hash + Objects.hashCode(this.labourCostPerSqFt);
+        hash = 37 * hash + Objects.hashCode(this.materialCost);
+        hash = 37 * hash + Objects.hashCode(this.labourCost);
+        hash = 37 * hash + Objects.hashCode(this.taxAmount);
+        hash = 37 * hash + Objects.hashCode(this.grandTotal);
+        hash = 37 * hash + Objects.hashCode(this.dueDate);
         return hash;
     }
 
@@ -235,17 +227,14 @@ public class Order {
         if (!Objects.equals(this.dueDate, other.dueDate)) {
             return false;
         }
-        if (!Objects.equals(this.localDate, other.localDate)) {
-            return false;
-        }
         return true;
     }
+    
+    
 
     @Override
     public String toString() {
-        return "Order{" + "orderID=" + orderID + ", customerName=" + customerName + ", stateCode=" + stateCode + ", taxRate=" + taxRate + ", productType=" + productType + ", area=" + area + ", costPerSqFt=" + costPerSqFt + ", labourCostPerSqFt=" + labourCostPerSqFt + ", materialCost=" + materialCost + ", labourCost=" + labourCost + ", taxAmount=" + taxAmount + ", grandTotal=" + grandTotal + ", dueDate=" + dueDate + ", localDate=" + localDate + '}';
+        return "Order{" + "orderID=" + orderID + ", customerName=" + customerName + ", stateCode=" + stateCode + ", taxRate=" + taxRate + ", productType=" + productType + ", area=" + area + ", costPerSqFt=" + costPerSqFt + ", labourCostPerSqFt=" + labourCostPerSqFt + ", materialCost=" + materialCost + ", labourCost=" + labourCost + ", taxAmount=" + taxAmount + ", grandTotal=" + grandTotal + ", dueDate=" + dueDate + ", localDate=" + '}';
     }
 
-    
-    
 }

@@ -185,7 +185,6 @@ public class UserIOConsoleImpl implements UserIO{
                 this.print("ERROR: Please Enter Valid Date");
             }
         }
-        //While loop will keep going until a valid date is inputted as mm/dd/yyyy
         return date;
     }
     

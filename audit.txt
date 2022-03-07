@@ -17,3 +17,16 @@
 2022-03-05T13:18:58.910985400 : OrderOrder{orderID=1, customerName=Jasmeen Kaur Judge, stateCode=ON, taxRate=6.00, productType=Tile, area=250.00, costPerSqFt=3.50, labourCostPerSqFt=4.15, materialCost=875.0000, labourCost=1037.5000, taxAmount=11475.000000, grandTotal=13387.500000, dueDate=2022-03-08, localDate=null}Removed
 2022-03-05T13:21:46.612898200 : OrderOrder{orderID=1, customerName=Jasmeen Kaur Judge, stateCode=ON, taxRate=6.00, productType=Tile, area=250.00, costPerSqFt=3.50, labourCostPerSqFt=4.15, materialCost=875.0000, labourCost=1037.5000, taxAmount=11475.000000, grandTotal=13387.500000, dueDate=2022-03-08, localDate=null}Removed
 2022-03-05T13:22:53.115795200 : Order3 has been placed!
+2022-03-07T09:30:54.096599700 : Order4 has been placed!
+2022-03-07T09:41:10.809723600 : OrderOrder{orderID=2, customerName=jasmeen kaur, stateCode=BC, taxRate=4.45, productType=Carpet, area=450.00, costPerSqFt=2.25, labourCostPerSqFt=2.10, materialCost=1012.5000, labourCost=945.0000, taxAmount=8710.875000, grandTotal=10668.375000, dueDate=2022-03-08, localDate=null}Removed
+2022-03-07T09:41:25.310081300 : OrderOrder{orderID=3, customerName=Jasmine kaur, stateCode=BC, taxRate=4.45, productType=Carpet, area=600.00, costPerSqFt=2.25, labourCostPerSqFt=2.10, materialCost=1350.0000, labourCost=1260.0000, taxAmount=11614.500000, grandTotal=14224.500000, dueDate=2022-03-08, localDate=null}Removed
+2022-03-07T09:41:41.293643900 : OrderOrder{orderID=4, customerName=jas, stateCode=BC, taxRate=4.45, productType=Carpet, area=100.00, costPerSqFt=2.25, labourCostPerSqFt=2.10, materialCost=225.0000, labourCost=210.0000, taxAmount=1935.750000, grandTotal=2370.750000, dueDate=2022-03-08, localDate=null}Removed
+2022-03-07T09:44:08.157242100 : Order1 has been placed!
+2022-03-07T10:11:17.836594800 : Order2 has been placed!
+2022-03-07T10:24:34.195506100 : Order3 has been placed!
+2022-03-07T10:25:22.770041200 : Order4 has been placed!
+2022-03-07T10:55:11.938352800 : Order2 has been edited!
+2022-03-07T11:34:25.797103800 : Order5 has been placed!
+2022-03-07T11:35:54.090748500 : Order4 has been edited!
+2022-03-07T11:46:33.541702800 : Order1 has been placed!
+2022-03-07T13:42:58.061093200 : Order2 has been placed!

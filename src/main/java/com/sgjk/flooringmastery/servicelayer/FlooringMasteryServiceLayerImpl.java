@@ -99,7 +99,7 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
     @Override
     public Order getAnOrder(LocalDate date, int orderID) throws FlooringMasteryPersistenceException, FlooringMasteryOrderNotFoundException {
         Order getOrder = dao.getAnOrder(date, orderID);
-        if(getOrder == null) {
+        if (getOrder == null) {
             throw new FlooringMasteryOrderNotFoundException("Order " + orderID + " Does not exist for " + date);
         }
         return getOrder;
@@ -110,14 +110,21 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
         return dao.getAllOrders(date);
     }
 
-//    @Override
-//    public List<Order> getOrdersByDate(LocalDate Date) throws FlooringMasteryPersistenceException {
-//        return dao.getOrdersByDate(Date);
-//    }
     @Override
     public void exportAllData() throws FlooringMasteryPersistenceException {
         dao.exportAllData();
     }
+
+    @Override
+    public List<Inventory> getAllInventory() throws FlooringMasteryPersistenceException {
+        return inventoryDao.getAllInventory();
+    }
+
+    @Override
+    public List<Tax> getAllTax() throws FlooringMasteryPersistenceException {
+        return taxDao.getAllTax();
+    }
+
     public Inventory getProductType(String productName) throws FlooringMasteryPersistenceException {
         return inventoryDao.getProductType(productName);
     }
@@ -161,29 +168,32 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
         BigDecimal orderArea = order.getArea();
         BigDecimal area = new BigDecimal("100");
         String productType = order.getProductType().toLowerCase();
-        productType = productType.substring(0, 1).toUpperCase() + productType.substring(1, productType.length());
+        if (productType.length() > 0) {
+            productType = productType.substring(0, 1).toUpperCase() + productType.substring(1, productType.length());
+        }
         String stateCode = order.getStateCode();
         LocalDate dueDate = order.getDueDate();
         LocalDate prevDate = LocalDate.now();
 
-        if (cusName == null || cusName.trim().length() == 0) {
-            throw new FlooringMasteryDataValidationException("Please enter valid name without using special characters ");
+        if (cusName.isBlank() || !cusName.matches("^[a-zA-Z0-9., ]+$")) {
+            throw new FlooringMasteryDataValidationException("Name must not be blank and must not contain special characters");
         }
 
         if (orderArea.compareTo(area) < 0) {
-            throw new FlooringMasteryDataValidationException("Please enter more than 100sq.ft. of an area");
+            throw new FlooringMasteryDataValidationException("The area must be atleast 100 Sq.Ft.");
         }
 
         if (inventoryDao.getProductType(productType) == null) {
-            throw new FlooringMasteryDataValidationException("Please enter a valid product");
+            throw new FlooringMasteryDataValidationException("Product is invalid");
         }
         if (taxDao.getTax(stateCode.toUpperCase()) == null) {
-            throw new FlooringMasteryDataValidationException("Please enter a valid State");
+            throw new FlooringMasteryDataValidationException("State is invalid");
         }
 
         if (!dueDate.isAfter(prevDate)) {
-            throw new FlooringMasteryDataValidationException("Please enter a valid future Date");
+            throw new FlooringMasteryDataValidationException("Date must be in the future");
         }
 
     }
+
 }

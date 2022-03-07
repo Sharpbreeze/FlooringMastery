@@ -5,16 +5,16 @@
  */
 package com.sgjk.flooringmastery.controller;
 
+import com.sgjk.flooringmastery.dto.Inventory;
 import com.sgjk.flooringmastery.dto.Order;
+import com.sgjk.flooringmastery.dto.Tax;
 import com.sgjk.flooringmastery.order.dao.FlooringMasteryPersistenceException;
 import com.sgjk.flooringmastery.servicelayer.FlooringMasteryDataValidationException;
 import com.sgjk.flooringmastery.servicelayer.FlooringMasteryOrderNotFoundException;
 import com.sgjk.flooringmastery.servicelayer.FlooringMasteryServiceLayer;
 import com.sgjk.flooringmastery.ui.FlooringMasteryView;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -78,7 +78,9 @@ public class Controller {
     }
     private void addAnOrder() throws FlooringMasteryPersistenceException, FlooringMasteryDataValidationException{
         view.displayMessage("***********Add necessary information*************");
-        Order currentOrder = view.getNewOrderInfo();
+        List<Tax> allTaxes = service.getAllTax();
+        List<Inventory> allInventory = service.getAllInventory();
+        Order currentOrder = view.getNewOrderInfo(allTaxes, allInventory);
         Order unconfirmedOrder = service.getUnconfirmedOrder(currentOrder);
         if (view.userConfirms(unconfirmedOrder)){
            Order confirmedOrder = service.addOrder(unconfirmedOrder);
@@ -91,7 +93,9 @@ public class Controller {
         LocalDate orderDate = view.getUserDate();
         int orderID = view.getOrderID();
         Order order = service.getAnOrder(orderDate, orderID);
-        Order orderToConfirm = view.editOrderInfo(order);
+        List<Tax> allTaxes = service.getAllTax();
+        List<Inventory> allInventory = service.getAllInventory();
+        Order orderToConfirm = view.editOrderInfo(order, allTaxes, allInventory);
         Order unconfirmedOrder = service.getUnconfirmedOrder(order);
         if (view.userConfirms(unconfirmedOrder)){
            Order confirmedOrder = service.editOrder(order);

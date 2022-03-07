@@ -18,25 +18,14 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class FlooringMasteryInventoryDaoImplTest {
     
+  FlooringMasteryInventoryDao dao;  
+  
     public FlooringMasteryInventoryDaoImplTest() {
+        dao = new FlooringMasteryInventoryDaoImpl("testInventory.txt");
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
     
-    @AfterAll
-    public static void tearDownClass() {
-    }
     
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
     @Test
     public void testSomeMethod() {
     }

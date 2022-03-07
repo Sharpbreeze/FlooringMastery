@@ -20,14 +20,8 @@ import java.util.List;
 public class FlooringMasteryView {
 
     private UserIO io;
-    //public Order order;
-    public Inventory inventory;
-    public Tax tax;
-    String customerName;
-    String stateCode;
-    BigDecimal area;
-    String product;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-DD-YYYY");
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
     public FlooringMasteryView(UserIO io) {
         this.io = io;
@@ -47,10 +41,12 @@ public class FlooringMasteryView {
         return io.readInt("Please select from the above choices.", 1, 6);
     }
 
-    public Order getNewOrderInfo() {
+    public Order getNewOrderInfo(List<Tax> allTaxes, List<Inventory> allInventory) {
         LocalDate dueDate = io.readLocalDate("Please enter due date");//should be in future not the local date- userIO
         String customerName = io.readString("Please enter your full  name");
+        displayStates(allTaxes);
         String stateName = io.readString("Please enter your state");
+        displayInventory(allInventory);
         String productType = io.readString("Please enter the product type");
         BigDecimal area = io.readBigDecimal("Please enter the area: The area must be a positive decimal");// area should be more than 100 sq fr- serIO
 
@@ -64,6 +60,26 @@ public class FlooringMasteryView {
         return currentOrder;
     }
 
+    public void displayStates(List<Tax> allTaxes) {
+        io.print("We service the following states: ");
+        String allStates = "";
+        for (Tax tax : allTaxes) {
+            String state = tax.getStateCode();
+            allStates += state + "  ";
+        }
+        io.print(allStates);
+    }
+
+    public void displayInventory(List<Inventory> allInventory) {
+        io.print("We offer the following products: ");
+        String allProducts = "";
+        for (Inventory inventory : allInventory) {
+            String product = inventory.getProductType();
+            allProducts += product + "  ";
+        }
+        io.print(allProducts);
+    }
+
     public boolean userConfirms(Order order) {
         io.print(" Date: " + order.getDueDate().format(formatter));
         io.print("Customer: " + order.getCustomerName() + "| State: " + order.getTaxRate() + order.getStateCode());
@@ -73,13 +89,13 @@ public class FlooringMasteryView {
         io.print("MaterialCost: $" + order.getMaterialCost() + " | Labour Cost Per SqFt.: $" + order.getLabourCost());
         io.print("Tax: $" + order.getTaxAmount() + " | Total: $" + order.getGrandTotal());
         String userResponse = io.readString("Are you sure you want to submit this order? (Y/N)");
-        if(userResponse.equalsIgnoreCase("Y")){
+        if (userResponse.equalsIgnoreCase("Y")) {
             return true;
         }
-       return false;
+        return false;
     }
-    
-    public void displaySuccessfullAdd(Order order){
+
+    public void displaySuccessfullAdd(Order order) {
         io.print("Successfully Added OrderNumber: " + order.getOrderID());
     }
 
@@ -91,15 +107,6 @@ public class FlooringMasteryView {
         return io.readInt("Please Enter Selection");
     }
 
-    
-
-//    public void displayAllOrder(List<Order> orderList) {
-//        if (orderList.size() > 0) {
-//            // orderList.stream().forEachOrdered(0->displayOrder(0));// what is an issue here?
-//        } else {
-//            io.print("No Orders To Display");
-//        }
-//    }
     public void displayOrder(Order order) {
 
         io.print("OrderID: " + order.getOrderID() + "| Date: " + order.getDueDate().format(formatter));
@@ -112,15 +119,51 @@ public class FlooringMasteryView {
 
     }
 
-    public Order editOrderInfo(Order order) {
+    public Order editOrderInfo(Order order, List<Tax> allTaxes, List<Inventory> allInventory) {
+        String customerName;
+        String stateCode;
+        BigDecimal area = new BigDecimal("0");
+        String product;
+        String areaString;
         io.print("Customer Name: " + order.getCustomerName());
-        customerName = io.readString("Please enter new Name: ");
+        customerName = io.readString("Please enter new Name or leave blank to keep an existing value ");
+        if (customerName.isBlank()) {
+            customerName = order.getCustomerName();
+        }
         io.print("Order State: " + order.getStateCode());
-        stateCode = io.readString("Please enter new state: ");
+        displayStates(allTaxes);
+        stateCode = io.readString("Please enter new state or leave blank to keep an existing value ");
+        if (stateCode.isBlank()) {
+            stateCode = order.getStateCode();
+        }
         io.print("Product Type: " + order.getProductType());
-        product = io.readString("Please enter new product type: ");
+        displayInventory(allInventory);
+        product = io.readString("Please enter new product type or leave blank to keep an existing value ");
+        if (product.isBlank()) {
+            product = order.getProductType();
+        }
         io.print("Area: " + order.getArea());
-        area = io.readBigDecimal("Please enter the area: ");
+        boolean invalidArea = true;
+
+        while (invalidArea) {
+            areaString = io.readString("Please enter the area or leave blank to keep an existing value ");
+            if (areaString.isBlank()) {
+                area = order.getArea();
+                invalidArea = false;
+            } else {
+                try {
+                    area = new BigDecimal(areaString);
+                    if (area.compareTo(new BigDecimal("100")) >= 0) {
+                        invalidArea = false;
+                    } else {
+                        io.print("Please enter area of atlease 100 Sq.Ft.");
+                    }
+
+                } catch (NumberFormatException e) {
+                    io.print("Please enter valid area");
+                }
+            }
+        }
 
         order.setArea(area);
         order.setCustomerName(customerName);
@@ -129,33 +172,24 @@ public class FlooringMasteryView {
 
         return order;
     }
-    
-    public boolean confirmDelete(Order order){
-        String userResponse = io.readString("Are you sure you want to delete order #" + order.getOrderID() + " (Y/N)? " );
-        if(userResponse.equalsIgnoreCase("Y")){
+
+    public boolean confirmDelete(Order order) {
+        String userResponse = io.readString("Are you sure you want to delete order #" + order.getOrderID() + " (Y/N)? ");
+        if (userResponse.equalsIgnoreCase("Y")) {
             return true;
         }
-       return false;
-    }
-
-    public void displayRemoveResult(Order OrderRecord) {
-        if (OrderRecord != null) {
-            io.print("Order successfully removed.");
-        } else {
-            io.print("No such Oder.");
-        }
-        io.readString("Please hit enter to continue.");
+        return false;
     }
 
     public void displayOrderList(List<Order> orderList) {//composition
-        if(orderList.isEmpty()){
+        if (orderList.isEmpty()) {
             io.print("No orders exist for this date");
         }
         for (Order order : orderList) {
 
             io.print("OrderID: " + order.getOrderID() + "| Date: " + order.getDueDate().format(formatter));
-            io.print("Customer: " + order.getCustomerName() + "| State: " + order.getTaxRate() + order.getStateCode());
-            io.print("Product: " + order.getProductType() + "| Area: " + order.getArea() + "SqFt.");
+            io.print("Customer: " + order.getCustomerName() + " | State: " + order.getTaxRate() + order.getStateCode());
+            io.print("Product: " + order.getProductType() + " | Area: " + order.getArea() + "SqFt.");
             io.print("CostPerSqFt: $" + order.getProductType() + order.getCostPerSqFt() + "| Labour Cost Per SqFt.: $"
                     + order.getProductType() + order.getLabourCostPerSqFt());
             io.print("MaterialCost: $" + order.getMaterialCost() + " | Labour Cost Per SqFt.: $" + order.getLabourCost());
@@ -170,7 +204,7 @@ public class FlooringMasteryView {
     }
 
     public int getOrderID() {
-       return io.readInt("Please enter order ID: ");
+        return io.readInt("Please enter order ID: ");
     }
 
     public void displayexitBanner() {
@@ -179,7 +213,7 @@ public class FlooringMasteryView {
 
     public void displaySuccessfullEdit(Order confirmedOrder) {
         io.print("Successfully Edited OrderNumber: " + confirmedOrder.getOrderID());
-    
+
     }
 
 }

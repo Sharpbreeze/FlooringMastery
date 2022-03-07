@@ -7,6 +7,7 @@ package com.sgjk.flooringmastery.tax.dao;
 
 import com.sgjk.flooringmastery.dto.Tax;
 import com.sgjk.flooringmastery.order.dao.FlooringMasteryPersistenceException;
+import java.util.List;
 
 /**
  *
@@ -15,9 +16,6 @@ import com.sgjk.flooringmastery.order.dao.FlooringMasteryPersistenceException;
 public interface FlooringMasteryTaxDao {
     Tax getTax (String stateAbb)  
            throws FlooringMasteryPersistenceException;
-//    String getStateCode (String stateCode)
-//            throws FlooringMasteryPersistenceException;
-//    BigDecimal getTaxRate (BigDecimal taxRate)
-//            throws FlooringMasteryPersistenceException;
-//    
+    public List<Tax> getAllTax()
+            throws FlooringMasteryPersistenceException;
 }

@@ -7,6 +7,7 @@ package com.sgjk.flooringmastery.inventory.dao;
 
 import com.sgjk.flooringmastery.dto.Inventory;
 import com.sgjk.flooringmastery.order.dao.FlooringMasteryPersistenceException;
+import java.util.List;
 
 /**
  *
@@ -15,8 +16,6 @@ import com.sgjk.flooringmastery.order.dao.FlooringMasteryPersistenceException;
 public interface FlooringMasteryInventoryDao {
     Inventory getProductType (String Product)
             throws FlooringMasteryPersistenceException;
-//    BigDecimal getCostPerSqFt (BigDecimal CostPerSqFt)
-//            throws FlooringMasteryPersistenceException;
-//    BigDecimal getLabourCostPerSqFt (BigDecimal LabourCostPerSqFt)
-//           throws FlooringMasteryPersistenceException;
+    public List<Inventory> getAllInventory()
+            throws FlooringMasteryPersistenceException;
 }
