@@ -31,6 +31,10 @@ public class FlooringMasteryTaxDaoImpl implements FlooringMasteryTaxDao{
         this.TAX_FILE_PATH = "Tax.txt";
         }
 
+    public FlooringMasteryTaxDaoImpl(String filePath){
+        this.TAX_FILE_PATH = filePath;
+    }
+    
     @Override
     public Tax getTax(String stateAbb) throws FlooringMasteryPersistenceException {
         

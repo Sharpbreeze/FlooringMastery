@@ -30,3 +30,8 @@
 2022-03-07T11:35:54.090748500 : Order4 has been edited!
 2022-03-07T11:46:33.541702800 : Order1 has been placed!
 2022-03-07T13:42:58.061093200 : Order2 has been placed!
+2022-03-08T08:14:44.438563200 : Order1 has been placed!
+2022-03-08T08:16:14.617723100 : Order1 has been edited!
+2022-03-08T08:17:04.441906600 : OrderOrder{orderID=1, customerName=Ravneet Cheema, stateCode=BC, taxRate=4.45, productType=Wood, area=250.00, costPerSqFt=5.15, labourCostPerSqFt=4.75, materialCost=1287.50, labourCost=1187.50, taxAmount=11013.75, grandTotal=13488.75, dueDate=2022-03-10, localDate=}Removed
+2022-03-08T08:22:59.046474200 : Order1 has been edited!
+2022-03-08T08:32:33.555673800 : Order6 has been placed!

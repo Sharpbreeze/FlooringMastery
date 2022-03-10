@@ -125,44 +125,6 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
         return taxDao.getAllTax();
     }
 
-    public Inventory getProductType(String productName) throws FlooringMasteryPersistenceException {
-        return inventoryDao.getProductType(productName);
-    }
-
-    public BigDecimal getMaterialCost(Inventory inventory, Order order) throws FlooringMasteryPersistenceException {
-        BigDecimal materialCost = inventory.getCostPerSqFt().multiply(order.getArea());
-        return materialCost;
-    }
-
-    public BigDecimal getLabourCost(Inventory inventory, Order order) throws FlooringMasteryPersistenceException {
-        BigDecimal labourCost = inventory.getLabourCostPerSqFt().multiply(order.getArea());
-        return labourCost;
-    }
-
-    public Tax getStateName(String stateName) throws FlooringMasteryPersistenceException {
-        return taxDao.getTax(stateName);
-    }
-
-    public void orderSummary(Order order) throws FlooringMasteryPersistenceException {
-        System.out.println(order.getOrderID()
-                + order.getCustomerName()
-                + order.getDueDate()
-                + order.getArea()
-                + order.getProductType()
-                + order.getStateCode());
-
-    }
-
-    public BigDecimal grandTotal(Order order) throws FlooringMasteryPersistenceException {
-        BigDecimal cost = order.getCostPerSqFt().multiply(order.getArea());
-        BigDecimal labourCost = order.getLabourCostPerSqFt().multiply(order.getArea());
-        //BigDecimal totaCost = (cost).add(labourCost);
-        BigDecimal stateTax = ((cost).add(labourCost)).multiply(order.getTaxRate());
-        BigDecimal grandTotal = (cost).add(labourCost).add(stateTax);
-
-        return grandTotal;
-    }
-
     public void validateOrder(Order order) throws FlooringMasteryDataValidationException, FlooringMasteryPersistenceException {
         String cusName = order.getCustomerName();
         BigDecimal orderArea = order.getArea();

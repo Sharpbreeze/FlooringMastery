@@ -6,6 +6,7 @@
 package com.sgjk.flooringmastery.dto;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  *
@@ -50,5 +51,40 @@ public class Inventory {
     public void setLabourCostPerSqFt(BigDecimal labourCostPerSqFt) {
         this.labourCostPerSqFt = labourCostPerSqFt;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.productType);
+        hash = 41 * hash + Objects.hashCode(this.costPerSqFt);
+        hash = 41 * hash + Objects.hashCode(this.labourCostPerSqFt);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Inventory other = (Inventory) obj;
+        if (!Objects.equals(this.productType, other.productType)) {
+            return false;
+        }
+        if (!Objects.equals(this.costPerSqFt, other.costPerSqFt)) {
+            return false;
+        }
+        if (!Objects.equals(this.labourCostPerSqFt, other.labourCostPerSqFt)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }

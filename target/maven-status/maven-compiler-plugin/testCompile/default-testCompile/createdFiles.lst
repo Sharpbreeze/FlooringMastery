@@ -1,3 +1,8 @@
-com\sgjk\flooringmastery\inventory\dao\FlooringMasteryInventoryDaoImplTest.class
+com\sgjk\flooringmastery\servicelayer\FlooringMasteryInventoryDaoStubImpl.class
+com\sgjk\flooringmastery\servicelayer\FlooringMasteryOrderDaoStubImpl.class
 com\sgjk\flooringmastery\tax\dao\FlooringMasteryTaxDaoImplTest.class
+com\sgjk\flooringmastery\inventory\dao\FlooringMasteryInventoryDaoImplTest.class
+com\sgjk\flooringmastery\servicelayer\FlooringMasteryTaxDaoStubImpl.class
 com\sgjk\flooringmastery\order\dao\FlooringMasteryOrderDaoImplTest.class
+com\sgjk\flooringmastery\servicelayer\FlooringMasteryServiceLayerImplTest.class
+com\sgjk\flooringmastery\servicelayer\FlooringMasteryAuditDaoStubImpl.class
