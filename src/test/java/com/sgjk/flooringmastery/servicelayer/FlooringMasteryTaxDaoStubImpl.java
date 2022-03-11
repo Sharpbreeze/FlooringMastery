@@ -8,6 +8,7 @@ package com.sgjk.flooringmastery.servicelayer;
 import com.sgjk.flooringmastery.dto.Tax;
 import com.sgjk.flooringmastery.order.dao.FlooringMasteryPersistenceException;
 import com.sgjk.flooringmastery.tax.dao.FlooringMasteryTaxDao;
+import com.sgjk.flooringmastery.tax.dao.FlooringMasteryTaxDao;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

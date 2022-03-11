@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,jaaskiran kaur,QC,2.30,Plywood,150.00,2.40,3.50,360.00,525.00,2035.50,2920.50

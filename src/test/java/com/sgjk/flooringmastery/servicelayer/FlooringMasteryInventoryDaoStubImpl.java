@@ -7,6 +7,7 @@ package com.sgjk.flooringmastery.servicelayer;
 
 import com.sgjk.flooringmastery.dto.Inventory;
 import com.sgjk.flooringmastery.inventory.dao.FlooringMasteryInventoryDao;
+import com.sgjk.flooringmastery.inventory.dao.FlooringMasteryInventoryDao;
 import com.sgjk.flooringmastery.order.dao.FlooringMasteryPersistenceException;
 import java.math.BigDecimal;
 import java.util.ArrayList;

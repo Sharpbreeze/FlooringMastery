@@ -16,10 +16,8 @@ import com.sgjk.flooringmastery.servicelayer.FlooringMasteryServiceLayer;
 import com.sgjk.flooringmastery.servicelayer.FlooringMasteryServiceLayerImpl;
 import com.sgjk.flooringmastery.tax.dao.FlooringMasteryTaxDao;
 import com.sgjk.flooringmastery.tax.dao.FlooringMasteryTaxDaoImpl;
-import com.sgjk.flooringmastery.ui.FlooringMasteryView;
-import com.sgjk.flooringmastery.ui.UserIO;
-import com.sgjk.flooringmastery.ui.UserIOConsoleImpl;
-import java.io.IOException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -27,15 +25,10 @@ import java.io.IOException;
  */
 public class App {
     
-    public static void main(String[] args) throws IOException{
-        UserIO myIo = new UserIOConsoleImpl();
-        FlooringMasteryView myView = new FlooringMasteryView(myIo);
-        FlooringMasteryOrderDao myOrderDao = new FlooringMasteryOrderDaoImpl();
-        FlooringMasteryInventoryDao myInventoryDao = new FlooringMasteryInventoryDaoImpl();
-        FlooringMasteryTaxDao myTaxDao = new FlooringMasteryTaxDaoImpl();
-        FlooringMasteryAuditDao myAuditDao = new FlooringMasteryAuditDaoImpl();
-        FlooringMasteryServiceLayer myService = new FlooringMasteryServiceLayerImpl(myOrderDao, myAuditDao, myTaxDao, myInventoryDao );
-        Controller controller = new Controller(myView, myService);
+    public static void main(String[] args) {
+
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Controller controller = appContext.getBean("controller", Controller.class);
         controller.run();
     }
     

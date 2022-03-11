@@ -80,5 +80,4 @@ public class FlooringMasteryTaxDaoImplTest {
         assertEquals(allTax.size(),13,"all inventory should be 13");
     }
 
-
 }

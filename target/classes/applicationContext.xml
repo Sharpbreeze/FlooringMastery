@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/mvc
+          http://www.springframework.org/schema/mvc/spring-mvc.xsd
+          http://www.springframework.org/schema/tx
+          http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/aop  
+          http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+    <bean id="io" 
+          class="com.sgjk.flooringmastery.ui.UserIOConsoleImpl" />
+    <bean id="orderDao" 
+          class="com.sgjk.flooringmastery.order.dao.FlooringMasteryOrderDaoImpl" />
+    <bean id="inventoryDao" 
+          class="com.sgjk.flooringmastery.inventory.dao.FlooringMasteryInventoryDaoImpl" />
+    <bean id="taxDao" 
+          class="com.sgjk.flooringmastery.tax.dao.FlooringMasteryTaxDaoImpl" />
+    <bean id="auditDao" 
+          class="com.sgjk.flooringmastery.order.dao.FlooringMasteryAuditDaoImpl"/>
+    <bean id="view" 
+          class="com.sgjk.flooringmastery.ui.FlooringMasteryView">
+        <constructor-arg ref="io" />
+    </bean>
+    <bean id="service" 
+          class="com.sgjk.flooringmastery.servicelayer.FlooringMasteryServiceLayerImpl">
+        <constructor-arg ref="orderDao" />
+        <constructor-arg ref="inventoryDao" />
+        <constructor-arg ref="taxDao" />
+        <constructor-arg ref="auditDao" />
+    </bean>
+    <bean id="controller" 
+          class="com.sgjk.flooringmastery.controller.Controller" >
+        <constructor-arg ref="service" /> 
+        <constructor-arg ref="view" />
+    </bean>
+        
+</beans>
